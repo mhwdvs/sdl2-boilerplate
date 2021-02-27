@@ -1,5 +1,5 @@
 target_sources(${PROJECT_NAME} PRIVATE
-        main.c
+        main.cpp
         )
 
 # Include project header files.

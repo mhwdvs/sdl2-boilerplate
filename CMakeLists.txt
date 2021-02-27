@@ -1,14 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
-
-set(PROJECT_NAME Main)
-
 # set the project name
-project(${PROJECT_NAME} LANGUAGES C)
+set(PROJECT_NAME Main)
+project(${PROJECT_NAME})
 
 # add the executable
 add_executable(${PROJECT_NAME})
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY C_STANDARD 11)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
 
 # Set compile flags.
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -64,13 +62,10 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
                  EXCLUDE_FROM_ALL)
 
-
-
-# find_package(OpenGL REQUIRED) # OpenGL
-
 # Include and link against dependencies.
-target_link_libraries(${PROJECT_NAME} PRIVATE gtest_main)
+target_link_libraries(${PROJECT_NAME} PRIVATE gtest gmock gtest_main)
+
+enable_testing()
 add_test(NAME example_test COMMAND ${PROJECT_NAME})
 
 add_subdirectory(src)
-
