@@ -38,6 +38,7 @@ endif()
 
 # Google Test
 # Download and unpack googletest at configure time
+option(BUILD_TESTING "" OFF)
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
   RESULT_VARIABLE result
@@ -65,7 +66,17 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 # Include and link against dependencies.
 target_link_libraries(${PROJECT_NAME} PRIVATE gtest gmock gtest_main)
 
-enable_testing()
-add_test(NAME example_test COMMAND ${PROJECT_NAME})
+include(CTest)
+include(GoogleTest)
+
+if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
+    #enable_testing()
+    option(BUILD_TESTING "" ON)
+    gtest_discover_tests(${PROJECT_NAME})
+else()
+    message("yo")
+    set(${BUILD_TESTING} OFF)
+endif()
+message(BUILD_TESTING)
 
 add_subdirectory(src)
