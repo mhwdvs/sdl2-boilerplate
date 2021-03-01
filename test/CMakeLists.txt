@@ -1,15 +1,13 @@
-add_executable(testlib testlib.cpp)
+target_sources(tests PRIVATE
+        testlib.cpp
+        )
 
-enable_testing()
-include(CTest)
-include(GoogleTest)
-gtest_discover_tests(testlib})
+# Include project header files.
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # --- DEPENDENCIES ---
-
 # Google Test
 # Download and unpack googletest at configure time
-option(BUILD_TESTING "" OFF)
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
         RESULT_VARIABLE result
@@ -37,9 +35,5 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 # Include and link against dependencies.
 target_link_libraries(${PROJECT_NAME} PRIVATE gtest gmock gtest_main)
 
-target_sources(${PROJECT_NAME} PRIVATE
-        main.cpp
-        )
-
-# Include project header files.
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+# END GOOGLETEST
+#------------------------------------------------------
