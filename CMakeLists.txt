@@ -10,6 +10,7 @@ add_subdirectory(src)
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
 
+# GoogleTest
 if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     message("Tests enabled in debug build!")
     # create tests projects
@@ -20,3 +21,14 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     add_subdirectory(test)
 endif()
 
+# Doxygen
+find_package(Doxygen)
+if (DOXYGEN_FOUND)
+    set(DOXYGEN_IN ${CMAKE_SOURCE_DIR}/.doxyconf)
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+    add_custom_target(doc ALL
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_IN}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM)
+endif (DOXYGEN_FOUND)
