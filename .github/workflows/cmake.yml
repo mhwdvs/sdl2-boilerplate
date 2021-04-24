@@ -67,4 +67,4 @@ jobs:
       - name: Run Cppcheck
         working-directory: ${{github.workspace}}
         shell: bash
-        run: cppcheck src/ --enable=all --error-exitcode=1
+        run: ls -la && cppcheck src/ --enable=all --error-exitcode=1
