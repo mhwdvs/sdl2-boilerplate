@@ -62,9 +62,12 @@ jobs:
   Cppcheck:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Install Cppcheck
         run: sudo apt install cppcheck
+
       - name: Run Cppcheck
         working-directory: ${{github.workspace}}
         shell: bash
-        run: ls -la && cppcheck src/ --enable=all --error-exitcode=1
+        run: ls && pwd && cppcheck src/ --enable=all --error-exitcode=1
