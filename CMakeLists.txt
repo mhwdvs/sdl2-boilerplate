@@ -4,6 +4,8 @@ set(PROJECT_NAME Main)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 project(${PROJECT_NAME})
 
+include(CTest)
+
 # add associated directory for main executable
 add_subdirectory(src)
 # add associated directory for tests executable
@@ -21,4 +23,3 @@ if (DOXYGEN_FOUND)
         COMMENT "Generating API documentation with Doxygen"
         VERBATIM)
 endif ()
-
