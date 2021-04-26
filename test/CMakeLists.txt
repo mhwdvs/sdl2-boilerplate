@@ -5,6 +5,7 @@ message(${SOURCE_DIR})
 # add executable to tests project
 add_executable(tests
         testlib.cpp
+        egTest.cpp
         )
 
 # Include and link against dependencies.
