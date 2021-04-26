@@ -40,5 +40,8 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 # Include and link against dependencies.
 target_link_libraries(${PROJECT_NAME} PRIVATE gtest gmock gtest_main)
 
+include(GoogleTest)
+gtest_add_tests(TARGET tests)
+
 # END GOOGLETEST
 #------------------------------------------------------
