@@ -1,12 +1,10 @@
 project(tests)
 include_directories(${SOURCE_DIR})
-message(${SOURCE_DIR})
+
+file(GLOB SOURCES CONFIGURE_DEPENDS "*.h" "*.cpp")
 
 # add executable to tests project
-add_executable(tests
-        testlib.cpp
-        egTest.cpp
-        )
+add_executable(tests ${SOURCES})
 
 # Include and link against dependencies.
 target_link_libraries(tests PUBLIC ${CMAKE_PROJECT_NAME}_lib)

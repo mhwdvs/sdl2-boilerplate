@@ -1,11 +1,6 @@
 # add the executable
-set(SOURCES
-        main.cpp
-        )
+file(GLOB SOURCES CONFIGURE_DEPENDS "*.h" "*.cpp")
 
-set(HEADERS
-        )
-
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 11)
-add_library(${CMAKE_PROJECT_NAME}_lib SHARED STATIC ${HEADERS} ${SOURCES})
+add_library(${CMAKE_PROJECT_NAME}_lib SHARED STATIC ${SOURCES})
