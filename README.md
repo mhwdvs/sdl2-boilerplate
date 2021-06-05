@@ -1,12 +1,11 @@
 # C/C++ CMake Boilerplate
 
-## Outputting a CodeBlocks project file
+A general purpose C++ boilerplate. 
 
-`cmake . -G 'CodeBlocks - Unix MakeFiles'`
+Comes preconfigured with Google Test/CTest, basic project structure and CodeBlocks project generator script
 
-OR
+## How to clone
 
-`cmake . -G 'CodeBlocks - Ninja'`
+This project utilises *git submodules*. To both clone this and the required submodules run;
 
-- Ninja is faster
-- Unix Makefiles may be **more ubiquitous**
+`git clone --recurse-submodules https://github.com/mhwdvs/cpp-boilerplate`
