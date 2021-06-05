@@ -23,3 +23,7 @@ if (DOXYGEN_FOUND)
         COMMENT "Generating API documentation with Doxygen"
         VERBATIM)
 endif ()
+
+execute_process(COMMAND python3 codeblocks-project-generator/main.py
+        WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY}
+        COMMAND_ECHO STDOUT)
