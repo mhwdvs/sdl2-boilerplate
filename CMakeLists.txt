@@ -2,22 +2,32 @@ cmake_minimum_required(VERSION 3.15)
 # set the project name
 set(PROJECT_NAME Main)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-project(${PROJECT_NAME})
+project(${PROJECT_NAME} VERSION 0.1.0 LANGUAGES CXX)
 
 include(CTest)
-
-if(${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    # using clang
-    set(COOL_FLAGS "-std=c++11 -Wall -Wextra -fsanitize=address,undefined,leak")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COOL_FLAGS}")
-    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer ${COOL_FLAGS}")
-    set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer ${COOL_FLAGS}")
-endif()
 
 # add associated directory for main executable
 add_subdirectory(src)
 # add associated directory for tests executable
 add_subdirectory(test)
+
+# Set compile options
+target_compile_options(${PROJECT_NAME} PRIVATE 
+    # Clang and AppleClang
+    $<$<CXX_COMPILER_ID:Clang>:-std=c++11 -v -Wall -Wextra -fno-omit-frame-pointer -fsanitize=address,undefined,leak>
+
+    # GNU GCC/G++
+    $<$<CXX_COMPILER_ID:GNU>:-std=c++11 -Wall -Wextra -Werror -pedantic>
+
+    # MSVC
+    $<$<CXX_COMPILER_ID:MSVC>:/std:c11 /W4 /WX>
+)
+
+target_link_options(${PROJECT_NAME} PRIVATE
+    # Clang and AppleClang
+    $<$<CXX_COMPILER_ID:Clang>:-fsanitize=address,undefined,leak>
+)
+
 
 # Doxygen and graphiz
 find_package(Doxygen REQUIRED dot REQUIRED)
