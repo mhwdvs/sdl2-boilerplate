@@ -41,6 +41,10 @@ jobs:
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 
+    - name: Clone Submodules
+      working-directory: ${{github.workspace}}/build
+      run: git clone --recurse-submodules https://github.com/mhwdvs/sdl2-boilerplate
+
     - name: Build
       working-directory: ${{github.workspace}}/build
       shell: bash
