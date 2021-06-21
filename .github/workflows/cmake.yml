@@ -28,7 +28,7 @@ jobs:
 
     - name: Clone Submodules
       working-directory: ../
-      run: git clone --recurse-submodules https://github.com/mhwdvs/sdl2-boilerplate
+      run: git submodule init && git submodule update
 
     - name: Build
       shell: bash
