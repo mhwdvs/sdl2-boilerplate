@@ -6,6 +6,10 @@ project(${PROJECT_NAME} VERSION 0.1.0 LANGUAGES CXX)
 
 include(CTest)
 
+# Build SDL2
+add_subdirectory(SDL)
+find_package(SDL REQUIRED)
+
 # add associated directory for main executable
 add_subdirectory(src)
 # add associated directory for tests executable
