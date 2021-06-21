@@ -20,38 +20,13 @@ jobs:
     - name: Install linux dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install wayland-protocols \
-        pkg-config \
-        ninja-build \
-        libasound2-dev \
-        libdbus-1-dev \
-        libegl1-mesa-dev \
-        libgl1-mesa-dev \
-        libgles2-mesa-dev \
-        libglu1-mesa-dev \
-        libibus-1.0-dev \
-        libpulse-dev \
-        libsdl2-2.0-0 \
-        libsndio-dev \
-        libudev-dev \
-        libwayland-dev \
-        libwayland-client++0 \
-        wayland-scanner++ \
-        libwayland-cursor++0 \
-        libx11-dev \
-        libxcursor-dev \
-        libxext-dev \
-        libxi-dev \
-        libxinerama-dev \
-        libxkbcommon-dev \
-        libxrandr-dev \
-        libxss-dev \
-        libxt-dev \
-        libxv-dev \
-        libxxf86vm-dev \
-        libdrm-dev \
-        libgbm-dev \
-        libpulse-dev
+        sudo apt-get install build-essential git make cmake autoconf automake \
+        libtool pkg-config libasound2-dev libpulse-dev libaudio-dev libjack-dev \
+        libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev \
+        libxinerama-dev libxxf86vm-dev libxss-dev libgl1-mesa-dev libdbus-1-dev \
+        libudev-dev libgles2-mesa-dev libegl1-mesa-dev libibus-1.0-dev \
+        fcitx-libs-dev libsamplerate0-dev libsndio-dev libwayland-dev \
+        libxkbcommon-dev libdrm-dev libgbm-dev
 
     - name: Install Doxygen
       run: sudo apt install doxygen
