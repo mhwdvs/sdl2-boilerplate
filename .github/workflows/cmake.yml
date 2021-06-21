@@ -50,7 +50,7 @@ jobs:
         libxv-dev \
         libxxf86vm-dev \
         libdrm-dev \
-        libgbm-dev\
+        libgbm-dev \
         libpulse-dev
 
     - name: Install Doxygen
