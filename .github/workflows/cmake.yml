@@ -27,10 +27,12 @@ jobs:
       run: sudo apt install valgrind
 
     - name: Clone Submodules
+      working-directory: ${{github.workspace}}
       run: git clone --recurse-submodules https://github.com/mhwdvs/sdl2-boilerplate
 
     - name: Build
       shell: bash
+      working-directory: ${{github.workspace}}
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: cmake -S . -B build
 
