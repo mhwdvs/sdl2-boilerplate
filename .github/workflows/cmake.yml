@@ -41,7 +41,7 @@ jobs:
       run: git submodule init && git submodule update
 
     - name: Install git lfs
-      run: git lfs install
+      run: git lfs install && git pull
 
     - name: CMake
       shell: bash
