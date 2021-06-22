@@ -11,3 +11,4 @@ add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 add_library(${CMAKE_PROJECT_NAME}_lib SHARED STATIC ${SOURCES})
 # Link SDL
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(${PROJECT_NAME}_lib PRIVATE SDL2::SDL2 SDL2::SDL2main)
