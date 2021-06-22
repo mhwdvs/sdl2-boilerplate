@@ -40,6 +40,9 @@ jobs:
     - name: Clone Submodules
       run: git submodule init && git submodule update
 
+    - name: Set env variables
+      run: export SDL_VIDEODRIVER=dummy
+
     - name: CMake
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
