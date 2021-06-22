@@ -56,10 +56,10 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C $BUILD_TYPE
        
-    - name: Valgrind
+    - name: Run with sanitisers
       working-directory: build/src
       shell: bash
-      run: printf "User input here\n" | valgrind --error-exitcode=1 "./Main"
+      run: ./Main
 
   Cppcheck:
     runs-on: ubuntu-latest
