@@ -20,7 +20,7 @@ jobs:
     - name: Install linux dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install build-essential git make cmake autoconf automake \
+        sudo apt-get install build-essential git make cmake ninja autoconf automake \
         libtool pkg-config libasound2-dev libpulse-dev libaudio-dev libjack-dev \
         libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev \
         libxinerama-dev libxxf86vm-dev libxss-dev libgl1-mesa-dev libdbus-1-dev \
@@ -40,10 +40,14 @@ jobs:
     - name: Clone Submodules
       run: git submodule init && git submodule update
 
-    - name: Build
+    - name: CMake
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: cmake -S . -B build
+      run: cmake -S . -B build -G Ninja
+
+    - name: Build
+      working-directory: build
+      run: ninja
 
     - name: Test
       working-directory: build
