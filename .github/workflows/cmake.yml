@@ -59,7 +59,7 @@ jobs:
     - name: Run with sanitisers
       working-directory: build/src
       shell: bash
-      run: export SDL_VIDEODRIVER=dummy && ./Main
+      run: export SDL_VIDEODRIVER=dummy && ./Main --headless
 
   Cppcheck:
     runs-on: ubuntu-latest
