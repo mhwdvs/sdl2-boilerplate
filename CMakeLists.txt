@@ -30,4 +30,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 target_link_options(${PROJECT_NAME} PRIVATE
     # Clang and AppleClang
     $<$<CXX_COMPILER_ID:Clang>:-fsanitize=address,undefined,leak>
+
+    # GNU GCC/G++
+    $<$<CXX_COMPILER_ID:GNU>: -fsanitize=address,leak>
+
+    # MSVC
+    $<$<CXX_COMPILER_ID:MSVC>: -fsanitize=address>
 )
