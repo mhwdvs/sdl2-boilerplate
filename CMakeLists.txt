@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 # set the project name
 set(PROJECT_NAME Main)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-project(${PROJECT_NAME} VERSION 0.1.0 LANGUAGES CXX)
+project(${PROJECT_NAME} VERSION 0.1.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 11)
 
 include(CTest)

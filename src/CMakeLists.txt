@@ -10,8 +10,8 @@ add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 # Create library (needed to make code accessible to tests)
 add_library(${CMAKE_PROJECT_NAME}_lib SHARED STATIC ${SOURCES})
 # Link SDL
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2 SDL2::SDL2 SDL2::SDL2main)
-target_link_libraries(${PROJECT_NAME}_lib PRIVATE SDL2 SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(${PROJECT_NAME} PRIVATE glad SDL2 SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(${PROJECT_NAME}_lib PRIVATE glad SDL2 SDL2::SDL2 SDL2::SDL2main)
 
 # Output SDL2 DLL to this dir
 if(WIN32) #or CYGWIN) 
