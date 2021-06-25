@@ -13,9 +13,12 @@ add_library(${CMAKE_PROJECT_NAME}_lib SHARED STATIC ${SOURCES})
 target_link_libraries(${PROJECT_NAME} PRIVATE glad SDL2 SDL2::SDL2 SDL2::SDL2main)
 target_link_libraries(${PROJECT_NAME}_lib PRIVATE glad SDL2 SDL2::SDL2 SDL2::SDL2main)
 
-# Output SDL2 DLL to this dir
+# Output SDL2 and glad DLL to this dir
 if(WIN32) #or CYGWIN) 
     set_target_properties(SDL2 PROPERTIES
+                          RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    set_target_properties(glad PROPERTIES
                           RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
 endif()
