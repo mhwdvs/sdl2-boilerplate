@@ -24,7 +24,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Werror -pedantic>
 
     # MSVC
-    $<$<CXX_COMPILER_ID:MSVC>:/W4>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 -fsanitize=address>
 )
 
 target_link_options(${PROJECT_NAME} PRIVATE
