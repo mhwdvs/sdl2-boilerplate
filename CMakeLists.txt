@@ -21,7 +21,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:Clang>:-v -Wall -Wextra -fsanitize=address,undefined,leak>
 
     # GNU GCC/G++
-    $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Werror -pedantic>
+    $<$<CXX_COMPILER_ID:GNU>: -Wall -Wextra -pedantic -fsanitize=address,leak>
 
     # MSVC
     $<$<CXX_COMPILER_ID:MSVC>:/W4 -fsanitize=address>
