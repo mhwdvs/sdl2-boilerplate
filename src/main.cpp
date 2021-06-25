@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
+
 #include <SDL.h>
+#include <glad/gl.h>
 
 int main(int argc, char** argv) {
     using std::cerr;
