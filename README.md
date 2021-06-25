@@ -6,6 +6,8 @@ Comes preconfigured with Google Test/CTest and basic project structure
 
 ## Compatability
 
+- It is recommended that Ninja and the `ninja` CMake generator is used (`-G Ninja`)
+
 - Clang on Linux/MacOS systems
 - MSVC on Windows systems
   - This is due to SDL not building with other compilers on Windows, such as GCC and Clang, due to issues with their CMake support.

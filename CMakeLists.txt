@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.19)
 # set the project name
 set(PROJECT_NAME Main)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
