@@ -11,7 +11,7 @@ endif()
 execute_process(COMMAND  "pip install .") # install python requirements
 
 add_subdirectory(glad/cmake)
-glad_add_library(glad SHARED API gl:core=4.5)
+glad_add_library(glad SHARED API gl:compatibility=1.2)
 
 # Build SDL2
 include_directories(${PROJECT_SOURCE_DIR}/SDL)

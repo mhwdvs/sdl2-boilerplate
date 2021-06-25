@@ -1,77 +1,87 @@
 #include <iostream>
-#include <cstdlib>
 
-#include <SDL.h>
 #include <glad/gl.h>
+#include <SDL.h>
 
-int main(int argc, char** argv) {
-    using std::cerr;
-    using std::endl;
+int main(int argc, char **argv) {
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        cerr << "SDL_Init Error: " << SDL_GetError() << endl;
-        return EXIT_FAILURE;
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+        std::cerr << "SDL2 video subsystem couldn't be initialized. Error: "
+                  << SDL_GetError()
+                  << std::endl;
+        exit(1);
     }
 
-    SDL_Window* win = SDL_CreateWindow("Hello World!", 100, 100, 620, 387, SDL_WINDOW_SHOWN);
-    if (win == nullptr) {
-        cerr << "SDL_CreateWindow Error: " << SDL_GetError() << endl;
-        return EXIT_FAILURE;
+    SDL_Window* window = SDL_CreateWindow("Glad Sample",
+                                          SDL_WINDOWPOS_CENTERED,
+                                          SDL_WINDOWPOS_CENTERED,
+                                          800, 600, SDL_WINDOW_SHOWN |
+                                          SDL_WINDOW_OPENGL);
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1,
+                                                SDL_RENDERER_ACCELERATED);
+
+    if (renderer == nullptr) {
+        std::cerr << "SDL2 Renderer couldn't be created. Error: "
+                  << SDL_GetError()
+                  << std::endl;
+        exit(1);
     }
 
-    bool shouldRender = true;
-    if(argc == 2 && std::string(argv[1]) == "--headless"){
-        // dont create or destory any renderers
-        shouldRender = false;
+    // Create a OpenGL context on SDL2
+    SDL_GLContext gl_context = SDL_GL_CreateContext(window);
+
+    // Load GL extensions using glad
+    int version = gladLoadGL(GLADloadfunc (SDL_GL_GetProcAddress));
+    if (!version) {
+        std::cerr << "Failed to initialize the OpenGL context." << std::endl;
+        exit(1);
     }
 
-    SDL_Renderer* ren = nullptr;
-    if(shouldRender){
-        ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    // Loaded OpenGL successfully.
+    std::cout << "OpenGL version loaded: " << GLAD_VERSION_MAJOR(version) << "."
+              << GLAD_VERSION_MINOR(version) << std::endl;
 
-        if (ren == nullptr) {
-            cerr << "SDL_CreateRenderer Error" << SDL_GetError() << endl;
-            SDL_DestroyWindow(win);
-            SDL_Quit();
-            return EXIT_FAILURE;
+    // Create an event handler
+    SDL_Event event;
+    // Loop condition
+    bool running = true;
+
+    while (running) {
+        SDL_PollEvent(&event);
+
+        switch(event.type) {
+        case SDL_QUIT:
+            running = false;
+            break;
+
+        case SDL_KEYDOWN:
+            switch(event.key.keysym.sym) {
+            case SDLK_ESCAPE:
+                running = false;
+                break;
+            }
         }
+
+        glClearColor(0, 0, 0, 1);
+
+        // You'd want to use modern OpenGL here
+        glColor3d(0, 1, 0);
+        glBegin(GL_TRIANGLES);
+            glVertex2f(.2, 0);
+            glVertex2f(.01, .2);
+            glVertex2f(-.2, 0);
+        glEnd();
+
+        SDL_GL_SwapWindow(window);
     }
 
-    SDL_Surface* bmp = SDL_LoadBMP("img/grumpy-cat.bmp");
-    if (bmp == nullptr) {
-        cerr << "SDL_LoadBMP Error: " << SDL_GetError() << endl;
-        SDL_DestroyRenderer(ren);
-        SDL_DestroyWindow(win);
-        SDL_Quit();
-        return EXIT_FAILURE;
-    }
+    // Destroy everything to not leak memory.
+    SDL_GL_DeleteContext(gl_context);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
 
-    if(shouldRender){
-        SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, bmp);
-        if (tex == nullptr) {
-            cerr << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << endl;
-            SDL_FreeSurface(bmp);
-            SDL_DestroyRenderer(ren);
-            SDL_DestroyWindow(win);
-            SDL_Quit();
-            return EXIT_FAILURE;
-        }
-
-        SDL_FreeSurface(bmp);
-
-        for (int i = 0; i < 20; i++) {
-            SDL_RenderClear(ren);
-            SDL_RenderCopy(ren, tex, nullptr, nullptr);
-            SDL_RenderPresent(ren);
-            SDL_Delay(100);
-        }
-
-        SDL_DestroyTexture(tex);
-        SDL_DestroyRenderer(ren);
-
-    }
-    SDL_DestroyWindow(win);
     SDL_Quit();
 
-    return EXIT_SUCCESS;
+    return 0;
 }
