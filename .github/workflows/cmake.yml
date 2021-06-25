@@ -33,9 +33,6 @@ jobs:
       
     - name: Install graphviz
       run: sudo apt install graphviz
-      
-    - name: Install Valgrind
-      run: sudo apt install valgrind
 
     - name: Clone Submodules
       run: git submodule init && git submodule update
